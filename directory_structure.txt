@@ -1,0 +1,68 @@
+src/
+|-- assets/                 (Put static assets like images, icons, etc. here)
+|-- components/
+|   |-- Auth/
+|   |   |-- PatientLogin.js
+|   |   |-- PatientRegister.js
+|   |   |-- AdminLogin.js
+|   |-- Navbar/
+|   |   |-- Navbar.js
+|   |-- Home/
+|   |   |-- Home.js
+|   |-- BookAppointment/
+|   |   |-- SearchClinic.js
+|   |   |-- ClinicDetails.js
+|   |   |-- AppointmentForm.js
+|   |   |-- Payments.js
+|   |-- ViewAppointments/
+|   |   |-- ViewAppointments.js
+|   |-- Profile/
+|   |   |-- Profile.js
+|   |   |-- MedicalRecords.js
+|   |   |-- Receipts.js
+|   |   |-- Feedback.js
+|   |-- AdminPortal/
+|   |   |-- Auth/
+|   |   |   |-- AdminLogin.js
+|   |   |-- Home/
+|   |   |   |-- AdminHome.js
+|   |   |-- Patients/
+|   |   |   |-- ViewPatientProfile.js
+|   |   |   |-- UpdatePatientDetails.js
+|   |   |   |-- DeletePatient.js
+|   |   |   |-- ViewPatientFeedbacks.js
+|   |   |-- ClinicAreas/
+|   |   |   |-- CreateClinic.js
+|   |   |   |-- DeleteClinic.js
+|   |   |   |-- SearchClinic.js
+|   |   |   |-- AddSlots.js
+|   |   |   |-- ViewAppointments.js
+|   |   |-- Appointments/
+|   |   |   |-- AddAppointments.js
+|   |   |   |-- UpdateAppointments.js
+|   |   |   |-- RemoveAppointments.js
+|   |   |   |-- SearchAppointments.js
+|   |   |   |-- AddMedicalRecord.js
+|   |   |-- Payments/
+|   |   |   |-- ViewPayments.js
+|   |   |   |-- RefundPayments.js
+|   |   |-- Profile/
+|   |   |   |-- AdminProfile.js
+|   |   |   |-- ResetPassword.js
+|   |   |   |-- DeleteAccount.js
+|   |   |-- Admins/     (For Super Admin)
+|   |   |   |-- AddAdmin.js
+|   |   |   |-- DeleteAdmin.js
+|   |   |   |-- SearchAdmin.js
+|-- services/
+|   |-- AuthService.js
+|   |-- ApiService.js
+|   |-- AdminService.js
+|   |-- PatientService.js
+|   |-- ClinicService.js
+|   |-- AppointmentService.js
+|   |-- PaymentService.js
+|   |-- FeedbackService.js
+|-- App.js
+|-- index.js
+|-- styles.css

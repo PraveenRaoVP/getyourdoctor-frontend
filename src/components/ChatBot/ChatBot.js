@@ -5,7 +5,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 const ChatBot = ({ user ,clinics }) => {
   const API_LINK="https://api.openai.com/v1/chat/completions"
  // const API_LINK="https://chatgpt-api.shn.hk/v1/"
-  const API_KEY = process.env.REACT_APP_OPENAI_APIKEY;
+  const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -18,7 +18,7 @@ const ChatBot = ({ user ,clinics }) => {
 
 
     const handleSend = async (message) => {
-        console.log(API_KEY)
+        //console.log(API_KEY)
         const newMessage = {
             message: message,
             sender: user.patientName,

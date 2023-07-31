@@ -9,7 +9,6 @@ import ClinicDetails from './components/BookAppointment/ClinicDetails';
 import AppointmentForm from './components/BookAppointment/AppointmentForm';
 import ViewAppointments from './components/ViewAppointments/ViewAppointments';
 import Profile from './components/Profile/Profile';
-import MedicalRecords from './components/Profile/MedicalRecord';
 import MedicalRecord from './components/Profile/MedicalRecord';
 import Feedback from './components/Profile/Feedback';
 import ChatBot from './components/ChatBot/ChatBot';

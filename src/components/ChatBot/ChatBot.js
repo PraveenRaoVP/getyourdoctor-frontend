@@ -5,7 +5,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 const ChatBot = ({ user ,clinics }) => {
   const API_LINK="https://api.openai.com/v1/chat/completions"
  // const API_LINK="https://chatgpt-api.shn.hk/v1/"
-  const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+  const API_KEY = process.env.REACT_APP_OPENAI_APIKEY;
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -45,7 +45,7 @@ const ChatBot = ({ user ,clinics }) => {
 
         const systemMessage  = {
             role: "system",
-            content: "Provide possible diseases from the symptoms entered by the patient, and provide the list of clinics that can be visited for that particular disease from the list which will be provided."
+            content: `Provide possible diseases from the symptoms entered by the patient, and provide the list of clinics that can be visited for that particular disease from the list which will be provided. The location of patient is ${user.patientAddress.city} and all the available clinics are ${clinics.map((clinic) => clinic.clinicAreaName+" - "+clinic.clinicAreaType+"-"+clinic.address+" - "+clinic.keywords).join(", ")}`
         }
 
         const apiRequestBody = {
@@ -67,6 +67,8 @@ const ChatBot = ({ user ,clinics }) => {
             return data.json();
         }).then((data) => {
             console.log(data);
+            setMessages([...chatMessages, {message: data.choices[0].message.content, sender: "Dr. ChatBot", direction: 'incoming'}]);
+            setTyping(false);
         })
 
     }

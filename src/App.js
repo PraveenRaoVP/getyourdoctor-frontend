@@ -12,6 +12,7 @@ import Profile from './components/Profile/Profile';
 import MedicalRecord from './components/Profile/MedicalRecord';
 import Feedback from './components/Profile/Feedback';
 import ChatBot from './components/ChatBot/ChatBot';
+import ChatBots from './components/ChatBot/ChatBots';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -77,7 +78,7 @@ function App() {
         <Route path="/feedback" element={<Feedback user={user} clinics={clinics} setClinics={setClinics} />} />
 
         {/* Chatbot route */}
-        <Route path="/chatbot" element={<ChatBot user={user} clinics={clinics} />} /> 
+        <Route path="/chatbot" element={<ChatBots user={user} clinics={clinics} />} /> 
 
       </Routes>
     </Router>

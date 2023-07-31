@@ -110,11 +110,11 @@ const AppointmentForm = ({ slot, onSubmit, user, clinicDetails }) => {
           />
         </div>
         <div>
-          <label htmlFor="clinicAreaLocation">Clinic Area Location:</label>
+          <label htmlFor="clinicAreaLocation">Clinic Area Address:</label>
           <input
             type="text"
-            id="clinicAreaLocation"
-            value={clinicDetails.location}
+            id="clinicAreaAddress"
+            value={clinicDetails.address}
             readOnly
           />
         </div>

@@ -15,7 +15,7 @@ const Navbar = ({ handleLogout }) => {
           <Link to="/view-upcoming-appointments">View Upcoming Appointments</Link>
         </li>
         <li>
-          <Link to="/search-clinic-areas">Search Clinic Areas</Link>
+          <Link to="/chatbot">Consult Dr.ChatBot</Link>
         </li>
         <li>
           <Link to="/profile">Profile</Link>

@@ -13,6 +13,8 @@ import MedicalRecord from './components/Profile/MedicalRecord';
 import Feedback from './components/Profile/Feedback';
 import ChatBot from './components/ChatBot/ChatBot';
 import ChatBots from './components/ChatBot/ChatBots';
+import AdminLogin from './components/AdminPortal/Auth/AdminLogin';
+import AdminHome from './components/AdminPortal/Home/AdminHome';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,11 +24,18 @@ function App() {
   const [clinicDetails, setClinicDetails] = useState(null);
   const [medicalRecord, setMedicalRecord] = useState(null);
   const [clinics, setClinics] = useState([]);
+  const [adminLoggedIn, setAdminLoggedIn] = useState(false);
 
   const handleSuccessfulLogin = (userData) => {
     setLoggedIn(true);
     setUser(userData);
   };
+
+  const handleSuccessfulAdminLogin = (adminData) => {
+    setAdminLoggedIn(true);
+    setUser(adminData);
+    // console.log(adminLoggedIn)
+  }
 
   const handleLogout= () => {
     setLoggedIn(false);
@@ -79,6 +88,13 @@ function App() {
 
         {/* Chatbot route */}
         <Route path="/chatbot" element={<ChatBots user={user} clinics={clinics} />} /> 
+
+
+        {/* Admin routes */}
+        <Route path="/admin/login" element={<AdminLogin handleSuccessfulAdminLogin={handleSuccessfulAdminLogin} />} />
+
+        {/* Admin default route */}
+        <Route path="/admin/home" element={adminLoggedIn ? <AdminHome user={user} /> : <Navigate to="/admin/login" />} />
 
       </Routes>
     </Router>

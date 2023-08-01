@@ -136,18 +136,11 @@ const ChatBots = ({ user, clinics }) => {
       // If clinic list is not empty, display the list of clinics
       const clinicMessage = `The clinics near you that you might want to visit:\n${clinicList.map(
           (clinic) =>
-            `${++i}. ${clinic.clinicAreaName} - ${clinic.clinicAreaType} - ${clinic.address} - ${clinic.keywords}`
+            `${++i}. ${clinic.clinicAreaName} - ${clinic.clinicAreaType} - ${clinic.address}`
         )
         .join("\n")}`;
+
       return clinicMessage;
-  
-      // setMessages([
-      //   ...messages,
-      //   {
-      //     message: clinicMessage,
-      //     sender: "Dr. ChatBot",
-      //     direction: "incoming"
-      //   }
     }
   };
   

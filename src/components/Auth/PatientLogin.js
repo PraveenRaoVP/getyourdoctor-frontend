@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import "./loginStyles.css";
 
 const PatientLogin = ({ handleSuccessfulLogin }) => {
     const apiUrl = process.env.REACT_APP_API_URL;   
@@ -44,20 +44,29 @@ const PatientLogin = ({ handleSuccessfulLogin }) => {
   };
 
   return (
-    <div>
+
+    <div className="container">
+      <div className="navbars">
+        <div className="logo">
+          <h1>GetYourDoctor</h1>
+        </div>
+      </div>
+      <div className="login-container">
       <h2>Login</h2>
-      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+      <input className="input input-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+        className="input input-password"
       />
-      <button onClick={handleLogin}>Login</button>
+      <button className='submit-btn' onClick={handleLogin}>Login</button>
       {error && <p>{error}</p>}
       <p>
         Don't have an account? <Link to="/register">Register now</Link>
       </p>
+      </div>
     </div>
   );
 };

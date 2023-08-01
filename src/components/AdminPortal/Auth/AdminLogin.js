@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import AuthService from '../../services/AuthService';
+import './adminLoginStyles.css';
 
 const AdminLogin = ({ handleSuccessfulAdminLogin }) => {
   const navigate = useNavigate();
@@ -43,7 +44,8 @@ const AdminLogin = ({ handleSuccessfulAdminLogin }) => {
     };
 
   return (
-    <div>
+    <div className='container'>
+        <div className="login-container">
       <h2>Admin Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -69,6 +71,7 @@ const AdminLogin = ({ handleSuccessfulAdminLogin }) => {
         </div>
         {error && <div>{error}</div>}
       </form>
+      </div>
     </div>
   );
 };

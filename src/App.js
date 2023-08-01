@@ -15,6 +15,12 @@ import ChatBot from './components/ChatBot/ChatBot';
 import ChatBots from './components/ChatBot/ChatBots';
 import AdminLogin from './components/AdminPortal/Auth/AdminLogin';
 import AdminHome from './components/AdminPortal/Home/AdminHome';
+import ViewPatientProfile from './components/AdminPortal/Patients/ViewPatientProfile';
+import UpdatePatientDetails from './components/AdminPortal/Patients/UpdatePatientDetails';
+import DeletePatient from './components/AdminPortal/Patients/DeletePatient';
+import ViewPatientFeedbacks from './components/AdminPortal/Patients/ViewPatientFeedbacks';
+import CreateClinic from './components/AdminPortal/ClinicAreas/CreateClinic/CreateClinic';
+import SearchClinicAdmin from './components/AdminPortal/ClinicAreas/SearchClinic/SearchClinicAdmin';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +31,7 @@ function App() {
   const [medicalRecord, setMedicalRecord] = useState(null);
   const [clinics, setClinics] = useState([]);
   const [adminLoggedIn, setAdminLoggedIn] = useState(false);
+  const [admin, setAdmin] = useState(null);
 
   const handleSuccessfulLogin = (userData) => {
     setLoggedIn(true);
@@ -33,7 +40,7 @@ function App() {
 
   const handleSuccessfulAdminLogin = (adminData) => {
     setAdminLoggedIn(true);
-    setUser(adminData);
+    setAdmin(adminData);
     // console.log(adminLoggedIn)
   }
 
@@ -94,7 +101,30 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin handleSuccessfulAdminLogin={handleSuccessfulAdminLogin} />} />
 
         {/* Admin default route */}
-        <Route path="/admin/home" element={adminLoggedIn ? <AdminHome user={user} /> : <Navigate to="/admin/login" />} />
+        <Route path="/admin/home" element={adminLoggedIn ? <AdminHome admin={admin} /> : <Navigate to="/admin/login" />} />
+        {/* Admin default route */}
+        <Route path="/" element={<Navigate to="/admin/home" />} />
+
+        {/* Admin default route */}
+        <Route path="/admin" element={adminLoggedIn ? <Navigate to="/admin/home" /> : <Navigate to="/admin/login" />} />
+        
+        {/* Admin View Patient Profile route */}
+        <Route path="/admin/patients/view" element={<ViewPatientProfile />} />
+
+        {/* Admin Update Patient Profile route */}
+        <Route path="/admin/patients/update" element={<UpdatePatientDetails />} />
+
+        {/* Admin delete users route */}
+        <Route path="/admin/patients/delete" element={<DeletePatient />} />
+
+        {/*Admin view patient feedbacks route */}
+        <Route path="/admin/patients/feedbacks" element={<ViewPatientFeedbacks />} />
+
+        {/* Admin create new clinic area route */}
+        <Route path="/admin/clinic-areas/create" element={<CreateClinic />} />
+
+        {/* Admin search clinics route */}
+        <Route path="/admin/clinic-areas/search" element={<SearchClinicAdmin />} />
 
       </Routes>
     </Router>

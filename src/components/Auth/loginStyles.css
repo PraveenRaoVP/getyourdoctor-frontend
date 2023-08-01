@@ -1,0 +1,31 @@
+.container{
+}
+
+.login-container{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+   /* margin: 100px;*/
+   margin-left: 350px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 20px;
+    margin-top: 200px;
+}
+
+.input{
+    margin: 10px 0;
+    width: 60%;
+}
+
+.submit-btn{
+    width: 40%;
+    margin-top: 20px;
+}
+
+.navbars{
+    border: 1px solid #000;
+    height: 100px;
+}   

@@ -1,9 +1,11 @@
 import React from 'react'
+import AdminNavbar from '../NavBar/AdminNavbar'
 
-const AdminHome = ({ user}) => {
+const AdminHome = ({ admin }) => {
   return (
     <div>
-      Admin Home
+        <AdminNavbar />
+      Welcome {admin.adminUsername}
     </div>
   )
 }

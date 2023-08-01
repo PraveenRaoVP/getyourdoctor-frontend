@@ -21,6 +21,10 @@ import DeletePatient from './components/AdminPortal/Patients/DeletePatient';
 import ViewPatientFeedbacks from './components/AdminPortal/Patients/ViewPatientFeedbacks';
 import CreateClinic from './components/AdminPortal/ClinicAreas/CreateClinic/CreateClinic';
 import SearchClinicAdmin from './components/AdminPortal/ClinicAreas/SearchClinic/SearchClinicAdmin';
+import DeleteClinic from './components/AdminPortal/ClinicAreas/DeleteClinic/DeleteClinic';
+import AddSlots from './components/AdminPortal/ClinicAreas/AddSlots/AddSlots';
+import ViewClinicAppointments from './components/AdminPortal/ClinicAreas/ViewClinicAppointments.js/ViewClinicAppointments';
+import AddAdmin from './components/AdminPortal/Admins/AddAdmin/AddAdmin';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -97,6 +101,10 @@ function App() {
         <Route path="/chatbot" element={<ChatBots user={user} clinics={clinics} />} /> 
 
 
+
+        {/* Admin Login and Basic routes */}
+
+
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin handleSuccessfulAdminLogin={handleSuccessfulAdminLogin} />} />
 
@@ -107,7 +115,11 @@ function App() {
 
         {/* Admin default route */}
         <Route path="/admin" element={adminLoggedIn ? <Navigate to="/admin/home" /> : <Navigate to="/admin/login" />} />
-        
+
+
+        {/* Admin Patient Routes */}
+
+
         {/* Admin View Patient Profile route */}
         <Route path="/admin/patients/view" element={<ViewPatientProfile />} />
 
@@ -120,11 +132,33 @@ function App() {
         {/*Admin view patient feedbacks route */}
         <Route path="/admin/patients/feedbacks" element={<ViewPatientFeedbacks />} />
 
+
+        {/*Admin Clinic Routes */}
+
         {/* Admin create new clinic area route */}
         <Route path="/admin/clinic-areas/create" element={<CreateClinic />} />
 
         {/* Admin search clinics route */}
         <Route path="/admin/clinic-areas/search" element={<SearchClinicAdmin />} />
+
+        {/* Admin delete clinics route */}
+        <Route path="/admin/clinic-areas/delete" element={<DeleteClinic />} />  
+
+        {/* Admin add slots route */}
+        <Route path="/admin/clinic-areas/add-slots" element={<AddSlots />} />
+
+        {/* Admin view appointments from clinics route */}
+        <Route path="/admin/clinic-areas/view-appointments" element={<ViewClinicAppointments />} />
+
+
+        {/* Admin Appointments Routes */}
+
+
+
+        {/* Admin Admins Routes */}
+        {/* Admin create new admin route */}
+        <Route path="/admin/admins/add" element={<AddAdmin />} />
+
 
       </Routes>
     </Router>

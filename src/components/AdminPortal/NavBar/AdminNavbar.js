@@ -3,7 +3,7 @@ import { NavDropdown, Nav, Navbar } from 'react-bootstrap'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import "./AdminNavbar.css"
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ admin }) => {
     const navigate = useNavigate();
     const [showPatientsDropdown, setShowPatientsDropdown] = useState(false);
     const [showClinicAreasDropdown, setShowClinicAreasDropdown] = useState(false);
@@ -111,6 +111,8 @@ const AdminNavbar = () => {
             </li>
   
             {/* Admins Dropdown */}
+            { admin.adminRole==="SUPERADMIN" && (
+              
             <li className="nav-item dropdown">
               <span
                 className="nav-link dropdown-toggle"
@@ -132,6 +134,7 @@ const AdminNavbar = () => {
                 </div>
               )}
             </li>
+            )}
   
             {/* Profile Dropdown */}
             <li className="nav-item dropdown">
@@ -155,6 +158,8 @@ const AdminNavbar = () => {
                 </div>
               )}
             </li>
+
+            
   
             {/* Logout */}
             <li className="nav-item">

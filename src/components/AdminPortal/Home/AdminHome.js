@@ -4,7 +4,7 @@ import AdminNavbar from '../NavBar/AdminNavbar'
 const AdminHome = ({ admin }) => {
   return (
     <div>
-        <AdminNavbar />
+        <AdminNavbar admin={admin} />
       Welcome {admin.adminUsername}
     </div>
   )

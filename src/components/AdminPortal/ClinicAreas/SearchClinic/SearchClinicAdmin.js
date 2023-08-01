@@ -20,7 +20,7 @@ const SearchClinicAdmin = () => {
   const handleClinicClick = async (clinicId) => {
     try {
       const response = await ClinicService.getClinicById(clinicId);
-      setSelectedClinic(response.data);
+      setSelectedClinic(response);
       console.log('Selected Clinic:', response.data);
     } catch (error) {
       console.error('Error fetching clinic details:', error);
@@ -40,7 +40,7 @@ const SearchClinicAdmin = () => {
           <ul>
             {searchResults.map((clinic) => (
               <li key={clinic.clinicAreaId} onClick={() => handleClinicClick(clinic.clinicAreaId)} className="clinic-item">
-                <span className="clinic-name">{clinic.clinicAreaName}</span>
+                <span className="clinic-name">{clinic.clinicAreaName} - </span>
                 <span className="clinic-type">{clinic.clinicAreaType}</span>
               </li>
             ))}

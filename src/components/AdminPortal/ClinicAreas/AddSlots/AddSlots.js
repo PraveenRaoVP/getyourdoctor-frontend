@@ -16,7 +16,7 @@ const AddSlots = () => {
         setErrorMessage('Please fill in all the required fields.');
         return;
       }
-      console.log(clinicId)
+      //console.log(clinicId)
 
       const slotData = {
         startTime: startTime,
@@ -25,7 +25,8 @@ const AddSlots = () => {
         available: true
       };
 
-      await ClinicService.addSlotToClinic(clinicId, slotData);
+      console.log(slotData)
+      // const response = await ClinicService.addSlotToClinic(clinicId, slotData);
       setSuccessMessage('Slot added successfully.');
       setErrorMessage('');
       setClinicId('');
@@ -46,8 +47,8 @@ const AddSlots = () => {
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <div className="slot-form">
         <input type="text" value={clinicId} onChange={(e) => setClinicId(e.target.value)} placeholder="Enter clinic ID" />
-        <input type="text" value={startTime} onChange={(e) => setStartTime(e.target.value)} placeholder="Enter start time" />
-        <input type="text" value={endTime} onChange={(e) => setEndTime(e.target.value)} placeholder="Enter end time" />
+        <input type="text" value={startTime} onChange={(e) => setStartTime(e.target.value)} placeholder="Enter start time (HH:MM:SS)" />
+        <input type="text" value={endTime} onChange={(e) => setEndTime(e.target.value)} placeholder="Enter end time (HH:MM:SS)" />
         <div className="day-checkboxes">
           <label>
             <input type="checkbox" checked={days.includes('Monday')} onChange={() => setDays((prevDays) => prevDays.includes('Monday') ? prevDays.filter(day => day !== 'Monday') : [...prevDays, 'Monday'])} />

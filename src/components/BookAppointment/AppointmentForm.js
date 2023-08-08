@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import Navbar from '../NavBar/NavBar';
+import styles from './appform.module.css';
+import { Button, TextField, Typography } from '@mui/material';
 
 const AppointmentForm = ({ slot, onSubmit, user, clinicDetails }) => {
   const [symptoms, setSymptoms] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState('');
-  const [appointmentDate, setAppointmentDate] = useState('');
+  const [appointmentDate, setAppointmentDate] = useState(getTodayDate());
   const [error, setError] = useState(false);
   const [success, setSuccess]=useState(false);
 
@@ -51,103 +54,124 @@ const AppointmentForm = ({ slot, onSubmit, user, clinicDetails }) => {
     }
   };
 
+  function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   return (
     <div>
-      <h2>Book Appointment</h2>
+      <Navbar />
+      <div className={styles.appointmentForm}>
+      <Typography variant="h5" style={{ paddingTop: '10px', paddingBottom: '10px'}}>Book Appointment</Typography>
       <form onSubmit={handleFormSubmit}>
         <div>
-          <label htmlFor="patientName">Patient's Name:</label>
-          <input
-            type="text"
-            id="patientName"
+          <TextField
+            label="Patient's Name"
             value={user.patientName}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="patientAge">Patient's Age:</label>
-          <input
+          <TextField
+            label="Patient's Age"
             type="number"
-            id="patientAge"
             value={user.patientAge}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="patientGender">Patient's Gender:</label>
-          <input
-            type="text"
-            id="patientGender"
+          <TextField
+            label="Patient's Gender"
             value={user.patientGender}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="patientEmail">Patient's Email:</label>
-          <input
+          <TextField
+            label="Patient's Email"
             type="email"
-            id="patientEmail"
             value={user.patientEmail}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="patientPhone">Patient's Phone:</label>
-          <input
-            type="text"
-            id="patientPhone"
+          <TextField
+            label="Patient's Phone"
             value={user.patientPhone}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="clinicAreaName">Clinic Area Name:</label>
-          <input
-            type="text"
-            id="clinicAreaName"
+          <TextField
+            label="Clinic Area Name"
             value={clinicDetails.clinicAreaName}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="clinicAreaLocation">Clinic Area Address:</label>
-          <input
-            type="text"
-            id="clinicAreaAddress"
+          <TextField
+            label="Clinic Area Address"
             value={clinicDetails.address}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="startTime">Slot:</label>
-          <input
-            type="text"
-            id="startTime"
+          <TextField
+            label="Slot"
             value={slot.startTime}
-            readOnly
+            className={styles.input}
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div>
-          <label htmlFor="symptoms">Symptoms:</label>
-          <input
-            type="text"
-            id="symptoms"
+          <TextField
+            label="Symptoms"
             value={symptoms}
+            className={styles.input}
             onChange={(e) => setSymptoms(e.target.value)}
             required
           />
         </div>
         <div>
-          <label htmlFor="doctor">Select Doctor:</label>
+          {/* <label htmlFor="doctor">Select Doctor:</label> */}
           <select
             id="doctor"
             value={selectedDoctor}
+            className={styles.input}
+            style={{ width: '100%', height: '55px', padding: '10px', color: 'gray', fontSize: '16px' }}
             onChange={(e) => setSelectedDoctor(e.target.value)}
             required
           >
             {/* Map through the list of doctors and create option elements */}
             {/* Replace with the actual list of doctors from your API */}
-            <option value="select">Select Doctor</option>
+            <option value="">Select Doctor</option>
             {
               slot.doctors.map((doctor) => (
                 <option key={doctor.doctorId} value={doctor.doctorId}>{doctor.doctorName}</option>
@@ -156,23 +180,26 @@ const AppointmentForm = ({ slot, onSubmit, user, clinicDetails }) => {
           </select>
         </div>
         <div>
-          <label htmlFor="appointmentDate">Appointment Date:</label>
-          <input
+          <TextField
+            label="Appointment Date"
             type="date"
-            id="appointmentDate"
             value={appointmentDate}
+            className={styles.input}
             onChange={(e) => setAppointmentDate(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Book Appointment</button>
-        {
-          success ? <p>Appointment Booked Successfully! Go To Upcoming Appointments Tab to View the Appointment Details!</p> : null
-        }
-        {
-          error ? <p>Appointment Booking Failed! Please Try Again!</p> : null
-        }
+        <Button type="submit" className={styles.submitBtn} variant="contained" color="primary">
+          Book Appointment
+        </Button>
+        {success ? (
+          <Typography>Appointment Booked Successfully! Go To Upcoming Appointments Tab to View the Appointment Details!</Typography>
+        ) : null}
+        {error ? (
+          <Typography>Appointment Booking Failed! Please Try Again!</Typography>
+        ) : null}
       </form>
+      </div>
     </div>
   );
 };

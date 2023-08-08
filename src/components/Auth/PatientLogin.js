@@ -1,6 +1,8 @@
+import { AppBar, Paper, TextField, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import "./loginStyles.css";
+import styles from "./login.module.css";
 
 const PatientLogin = ({ handleSuccessfulLogin }) => {
     const apiUrl = process.env.REACT_APP_API_URL;   
@@ -10,6 +12,7 @@ const PatientLogin = ({ handleSuccessfulLogin }) => {
     const [password, setPassword] = useState('');
 
     const [error, setError] = useState('');
+
 
     const handleLogin = async () => {
     try {
@@ -35,7 +38,8 @@ const PatientLogin = ({ handleSuccessfulLogin }) => {
         //console.log(user)
         handleSuccessfulLogin(user);
       } else {
-        alert('Invalid credentials');
+        setError("Invalid credentials");  
+        // alert('Invalid credentials');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -44,32 +48,53 @@ const PatientLogin = ({ handleSuccessfulLogin }) => {
   };
 
   return (
-
-    <div className="container">
-      <div className="navbars">
-        <div className="logo">
-          <h1>GetYourDoctor</h1>
-        </div>
-      </div>
-      <div className="login-container">
-      <h2>Login</h2>
-      <input className="input input-email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        className="input input-password"
-      />
-      <button className='submit-btn' onClick={handleLogin}>Login</button>
-      {error && <p>{error}</p>}
-      <p>
-        Don't have an account? <Link to="/register">Register now</Link>
-      </p>
-      </div>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            GetYourDoctor
+          </Typography>
+          <Typography variant="subtitle1" component={Link} to="/about" style={{ marginLeft: '16px', textDecoration: 'none', color: 'white' }}>
+            About
+          </Typography>
+          <Typography variant="subtitle1" component={Link} to="/contact" style={{ marginLeft: '16px', textDecoration: 'none', color: 'white' }}>
+            Contact
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Paper elevation={4} className={styles.loginContainer}>
+        <Card 
+        className={styles.loginCard}
+        style={{ width: '30rem', padding: '20px', margin: 'auto', marginTop: '50px' }}
+        >
+        <Typography variant="h5">Login</Typography>
+        <TextField
+          className={styles.input}
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+        />
+        <TextField
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          label="Password"
+          className={styles.input}
+          fullWidth
+        />
+        <Button variant="contained" color="primary" className={styles.submitBtn} onClick={handleLogin}>
+          Login
+        </Button>
+        {error && <Typography color="error">{error}</Typography>}
+        <Typography>
+          Don't have an account? <Link to="/register">Register now</Link>
+        </Typography>
+        </Card>
+      </Paper>
     </div>
   );
 };
-
 
 export default PatientLogin

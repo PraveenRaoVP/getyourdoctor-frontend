@@ -1,6 +1,8 @@
+import { AppBar, Paper, TextField, Toolbar, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import styles from "./register.module.css";
 
 const PatientRegister = ({successfulRegister ,handleSuccessfulRegister }) => {
   
@@ -84,35 +86,122 @@ const PatientRegister = ({successfulRegister ,handleSuccessfulRegister }) => {
 
   return (
     <div>
-      <h2>Register</h2>
-      <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-      <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
-      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" />
-      <input type="text" value={doorNo} onChange={(e) => setDoorNo(e.target.value)} placeholder="Door No" />
-      <input type="text" value={street} onChange={(e) => setStreet(e.target.value)} placeholder="Street" />
-      <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
-      <input type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="State" />
-      <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} placeholder="Country" />
-      <input type="text" value={pincode} onChange={(e) => setPincode(e.target.value)} placeholder="Pincode" />
-      <select value={gender} onChange={(e) => setGender(e.target.value)}>
-        <option value="">Select Gender</option>
-        <option value="MALE">Male</option>
-        <option value="FEMALE">Female</option>
-        <option value="OTHER">Other</option>
-      </select>
-      <label>Profile Picture:</label>
-      <input type="file" onChange={handleFileChange} />
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            GetYourDoctor
+          </Typography>
+          <Typography variant="subtitle1" component={Link} to="/about" style={{ marginLeft: '16px', textDecoration: 'none', color: 'white' }}>
+            About
+          </Typography>
+          <Typography variant="subtitle1" component={Link} to="/contact" style={{ marginLeft: '16px', textDecoration: 'none', color: 'white' }}>
+            Contact
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Paper elevation={3} className={styles.registerForm}>
+        <Card className={styles.registerCard} variant="outlined">
+        <Typography variant="h5">Register</Typography>
+        <TextField
+            className={styles.input}
+            label="Name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Age"
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Phone"
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Door No"
+            type="text"
+            value={doorNo}
+            onChange={(e) => setDoorNo(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Street"
+            type="text"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="City"
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="State"
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Country"
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            className={styles.input}
+            label="Pincode"
+            type="text"
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value)}
+            fullWidth
+          />
+        <select value={gender} className={styles.selectOption} onChange={(e) => setGender(e.target.value)}>
+          <option value="" label='Select Gender'>Select Gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
 
-      <button onClick={handleRegister}>Register</button>
-      {success ? <div><p>{success}</p><Link to="/login">Login</Link> </div>: <p>{error}</p>}
-      {/* {error && <p>{error}</p>} */}
+        <button onClick={handleRegister}>Register</button>
+        {success ? <div><p>{success}</p><Link to="/login">Login</Link> </div>: <p>{error}</p>}
+        {error && <p>{error}</p>} 
+        </Card>
+      </Paper>
     </div>
   );
 }

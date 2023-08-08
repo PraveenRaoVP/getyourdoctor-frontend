@@ -1,0 +1,13 @@
+.leftAppbar{
+    flex: 0.75
+}
+
+.rightAppBar{
+    flex: 0.25;
+    right: 0;
+    align-items: flex-end;
+}
+
+.summa{
+    display: flex;
+}

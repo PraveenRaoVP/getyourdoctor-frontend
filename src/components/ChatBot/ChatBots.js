@@ -1,5 +1,7 @@
 import { ChatContainer, MainContainer, Message, MessageInput, MessageList, TypingIndicator } from '@chatscope/chat-ui-kit-react'
 import React, { useState } from 'react'
+import Navbar from '../NavBar/NavBar';
+import styles from "./chatbot.module.css"
 
 const ChatBots = ({ user, clinics }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -77,18 +79,7 @@ const ChatBots = ({ user, clinics }) => {
   
     const systemMessage = {
       role: "system",
-      content: `Provide possible diseases from the symptoms entered by the patient, and provide the list of clinics that can be visited for that particular disease from the list which will be provided. The location of the patient is ${user.patientAddress.city} and all the available clinics are ${clinics
-        .map(
-          (clinic) =>
-            clinic.clinicAreaName +
-            " - " +
-            clinic.clinicAreaType +
-            "-" +
-            clinic.address +
-            " - " +
-            clinic.keywords
-        )
-        .join(", ")}`
+      content: `Provide possible diseases from the symptoms entered by the patient and be sympathetic`
     };
   
     const apiRequestBody = {
@@ -149,8 +140,9 @@ const ChatBots = ({ user, clinics }) => {
   
   return (
     <div>
-      <div style={{position: 'relative', height: '800px', width: '700px', display: 'flex', flexDirection: 'column', justifyContent:'center', alignContent: 'center'}}>
-        <MainContainer>
+      <Navbar />
+      <div className={styles.chatContainer}>
+        <MainContainer className={styles.mainContainer}>
             <ChatContainer>
                 <MessageList typingIndicator={typing ? <TypingIndicator content="Dr. ChatBot is analyzing..." /> : null}>
                     {messages.map((message, index) => (
@@ -165,6 +157,7 @@ const ChatBots = ({ user, clinics }) => {
                     placeholder="Type message here"
                     // value={input}
                     // onChange={(event) => setInput(event.target.value)}
+                    className={styles.messageInput}
                     onSend={handleSend}
                     attachButton={false}
                 />

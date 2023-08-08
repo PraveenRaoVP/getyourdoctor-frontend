@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../NavBar/NavBar';
+import { Button, Container, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import styles from "./feedback.module.css";
+import { FormControl } from 'react-bootstrap';
 
 const Feedback = ({ user, clinics, setClinics }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -69,6 +73,7 @@ const Feedback = ({ user, clinics, setClinics }) => {
 
   return (
     <div>
+      <Navbar />
       <h1>Feedback</h1>
       <form onSubmit={handleFeedbackSubmit}>
         <div>

@@ -1,0 +1,35 @@
+.selectedRow{
+    background-color: rgba(128,128,128,0.5);
+}
+
+.tableCellHeading{
+    font-weight: 700;
+}
+
+.clinicDetailsShow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.closeBtn{
+    padding-top: 10px;
+    width: 20%;
+    padding: 10px;
+    background-color: #fcfcfc;
+    color: #000;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+
+.cancelBtn{
+    padding-top: 10px;
+    width: 20%;
+    padding: 10px;
+    background-color: rgba(256,0,0,0.2);
+
+    font-weight: 700;
+}

@@ -1,0 +1,24 @@
+.searchContainer{
+    display: flex;
+    padding: 10px;
+}
+
+.searchButton{
+    height: 55px;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(137, 137, 222);
+    width: 100px;
+    border-radius: 20px;
+}
+
+.clinicsContainer{
+    display: flex;
+}
+
+.clinicElement{
+    border: 1px solid #000;
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+}

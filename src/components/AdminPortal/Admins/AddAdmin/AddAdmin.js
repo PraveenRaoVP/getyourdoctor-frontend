@@ -20,6 +20,7 @@ const AddAdmin = () => {
       adminPhone,
       adminRole,
     };
+    console.log(newAdmin);
     try {
       // Make the API call to add the new admin
       await AdminService.addAdmin(newAdmin);
@@ -67,6 +68,7 @@ const AddAdmin = () => {
             <option value="">Select Role</option>
             <option value="SUPERADMIN">Super Admin</option>
             <option value="ADMIN">Admin</option>
+            <option value="DOCTOR">Doctor</option>
           </select>
         </div>
         <button type="submit" className="submit-button">Add Admin</button>

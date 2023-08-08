@@ -25,6 +25,9 @@ import DeleteClinic from './components/AdminPortal/ClinicAreas/DeleteClinic/Dele
 import AddSlots from './components/AdminPortal/ClinicAreas/AddSlots/AddSlots';
 import ViewClinicAppointments from './components/AdminPortal/ClinicAreas/ViewClinicAppointments.js/ViewClinicAppointments';
 import AddAdmin from './components/AdminPortal/Admins/AddAdmin/AddAdmin';
+import SearchAdmin from './components/AdminPortal/Admins/SearchAdmin/SearchAdmin';
+import DeleteAdmin from './components/AdminPortal/Admins/DeleteAdmin/DeleteAdmin';
+import AdminProfile from './components/AdminPortal/AdminProfile/AdminProfile/AdminProfile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -159,6 +162,14 @@ function App() {
         {/* Admin create new admin route */}
         <Route path="/admin/admins/add" element={<AddAdmin />} />
 
+        {/* Admin Search Admins route */}
+        <Route path="/admin/admins/search" element={<SearchAdmin />} />
+
+        {/* Admin Delete Admins Route */}
+        <Route path="/admin/admins/delete" element={<DeleteAdmin />} />
+
+        {/* Admin Profile Route */}
+        <Route path="/admin/profile" element={<AdminProfile admin={admin} />} />
 
       </Routes>
     </Router>

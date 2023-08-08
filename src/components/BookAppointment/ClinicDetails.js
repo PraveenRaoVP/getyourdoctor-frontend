@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from '../NavBar/NavBar';
+import { Button, List, ListItem, ListItemText, Typography } from '@mui/material';
+import styles from "./ClinicDetails.module.css"
 
 const ClinicDetails = ({ onSelectSlot, onSelectClinic }) => {
   const { clinicId } = useParams();
@@ -38,43 +41,50 @@ const ClinicDetails = ({ onSelectSlot, onSelectClinic }) => {
     };
 
 
-  return (
-    <div>
-      {clinicDetails ? (
-        <div>
-          <h2>{clinicDetails.clinicAreaName}</h2>
-          <p>Type: {clinicDetails.clinicAreaType}</p>
-          <p>Working Days: {clinicDetails.workingDays.join(', ')}</p>
-          <p>Working Hours: {clinicDetails.workingHours}</p>
-          <p>Contact Number: {clinicDetails.contactNumber}</p>
-          <p>Email: {clinicDetails.email}</p>
-          <h3>Available Slots</h3>
-          {clinicDetails.availableSlots.length > 0 ? (
-            <ul>
-              {clinicDetails.availableSlots.map((slot) => (
-                <li key={slot.slotId}>
-                  <p>Start Time: {slot.startTime}</p>
-                  <p>End Time: {slot.endTime}</p>
-                  {/* Add booking functionality here */}
-                  {
-                    slot.available ? (
-                        <button onClick={() => onBookAppointment(slot, clinicDetails)}>Book Appointment</button>
-                    ) : (
-                        <button disabled>Unavailable</button>
-                    )
-                  }
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No available slots found.</p>
-          )}
-        </div>
-      ) : (
-        <p>Loading clinic details...</p>
-      )}
-    </div>
-  );
+    return (
+      <div>
+        <Navbar />
+        {clinicDetails ? (
+          <div>
+            <Typography variant="h5">{clinicDetails.clinicAreaName}</Typography>
+            <Typography>Type: {clinicDetails.clinicAreaType}</Typography>
+            <Typography>Working Days: {clinicDetails.workingDays.join(', ')}</Typography>
+            <Typography>Working Hours: {clinicDetails.workingHours}</Typography>
+            <Typography>Contact Number: {clinicDetails.contactNumber}</Typography>
+            <Typography>Email: {clinicDetails.email}</Typography>
+            <Typography>Address: {clinicDetails.address}</Typography>
+            
+            <Typography variant="h6" style={{ textAlign: 'center', paddingTop: '10px'}}>Available Slots</Typography>
+            <div className={styles.slotDetails}>
+              {clinicDetails.availableSlots.length > 0 ? (
+                <List>
+                  {clinicDetails.availableSlots.map((slot) => (
+                    <ListItem key={slot.slotId}>
+                      <ListItemText primary={`Start Time: ${slot.startTime}`} />
+                      <ListItemText primary={`End Time: ${slot.endTime}`} />
+                      <ListItemText primary={`Doctors: ${slot.doctors.map(doctor => doctor.doctorName).join(', ')}`} />
+                      {slot.available ? (
+                        <Button variant="contained" color="primary" onClick={() => onBookAppointment(slot, clinicDetails)}>
+                          Book Appointment
+                        </Button>
+                      ) : (
+                        <Button variant="contained" disabled>
+                          Unavailable
+                        </Button>
+                      )}
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Typography>No available slots found.</Typography>
+              )}
+            </div>
+          </div>
+        ) : (
+          <Typography>Loading clinic details...</Typography>
+        )}
+      </div>
+    );
 };
 
 export default ClinicDetails;

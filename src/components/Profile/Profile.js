@@ -1,5 +1,11 @@
+import { Avatar, Grid, Typography, Button } from '@mui/material';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import classes from "./profile.module.css";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LockIcon from '@mui/icons-material/Lock';
+import NavBar from '../NavBar/NavBar';
 
 const Profile = ({ user, handleLogout }) => {
 
@@ -36,35 +42,65 @@ const Profile = ({ user, handleLogout }) => {
 
   return (
     <div>
-      <h1>Welcome, {patientName}!</h1>
-      <div>
-        <h2>Profile Information</h2>
-        <p>Email: {patientEmail}</p>
-        <p>Age: {patientAge}</p>
-        <p>Phone: {patientPhone}</p>
-        <p>Gender: {patientGender}</p>
-        <p>Address: {patientAddress.street}, {patientAddress.city}, {patientAddress.state}, {patientAddress.pincode}</p>
-        {/* Display other user profile information as needed */}
-      </div>
-      <div>
-        <h2>Profile Picture</h2>
-        <img src={profilePictureUrl} alt="Profile" />
+    <NavBar />
+    <Grid container className={classes.root} spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant="h1" gutterBottom>
+          Welcome, {patientName}!
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h2" gutterBottom>
+          Profile Information
+        </Typography>
+        <Grid item xs={12}>
+        
+        <Avatar src={profilePictureUrl} alt="Profile" className={classes.avatar} />
         {/* You can customize the styling of the image if needed */}
-      </div>
-      <div>
-        <h2>Actions</h2>
-        <Link to="/medical-records">View Medical Records</Link>
-        <br />
-        <Link to="/receipts">View Receipts</Link>
-        <br />
-        <Link to="/feedback">Feedback</Link>
-        <br />
-        <button onClick={() => handleLogout()}>Logout</button>
-        <br />
-        <button onClick={() => handleDeleteAccount()}>Delete Account</button>
-        <br />
-        <button>Reset Password</button>
-      </div>
+      </Grid>
+        <Typography variant="body1" gutterBottom>
+          Email: {patientEmail}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Age: {patientAge}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Phone: {patientPhone}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Gender: {patientGender}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Address: {patientAddress.street}, {patientAddress.city}, {patientAddress.state}, {patientAddress.pincode}
+        </Typography>
+        {/* Display other user profile information as needed */}
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h2" gutterBottom>
+          Actions
+        </Typography>
+        <div className={classes.actions}>
+          <Button component={Link} to="/medical-records" variant="contained" color="primary">
+            View Medical Records
+          </Button>
+          <Button component={Link} to="/receipts" variant="contained" color="primary">
+            View Receipts
+          </Button>
+          <Button component={Link} to="/feedback" variant="contained" color="primary">
+            Feedback
+          </Button>
+          <Button onClick={() => handleLogout()} variant="contained" color="secondary" startIcon={<ExitToAppIcon />}>
+            Logout
+          </Button>
+          <Button onClick={() => handleDeleteAccount()} variant="contained" color="error" startIcon={<DeleteIcon />}>
+            Delete Account
+          </Button>
+          <Button variant="contained" startIcon={<LockIcon />}>
+            Reset Password
+          </Button>
+        </div>
+      </Grid>
+    </Grid>
     </div>
   );
 };

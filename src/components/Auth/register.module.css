@@ -1,0 +1,29 @@
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.registerCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 50%;
+}
+
+.input{
+    width: 50%;
+    margin: 10px;
+}
+
+.selectOption{
+    padding: 10px;
+    margin: 10px;
+    width: 50%;
+    margin-top: 10px;
+}

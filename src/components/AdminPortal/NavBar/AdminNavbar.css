@@ -1,13 +1,12 @@
-/* adminportal.css */
-
 /* Styling for the main container */
+/*
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Styling for the navbar */
+  /* Styling for the navbar
   .navbar {
     background-color: #f8f9fa;
     padding: 10px;
@@ -24,7 +23,7 @@
     color: #333;
   }
   
-  /* Styling for dropdown menus */
+  /* Styling for dropdown menus 
   .navbar-nav .nav-item .dropdown-menu {
     background-color: #f8f9fa;
     border: none;
@@ -40,7 +39,7 @@
     color: #fff;
   }
   
-  /* Styling for the logout link */
+  /* Styling for the logout link 
   .navbar-nav .nav-item .nav-link.logout {
     color: #dc3545;
   }
@@ -50,10 +49,10 @@
     color: #fff;
   }
   
-  /* Styling for the content */
+  /* Styling for the content 
   .content {
     padding: 20px;
   }
-  
+  */
   /* Optional: Add additional styles as needed for your specific layout and design */
   

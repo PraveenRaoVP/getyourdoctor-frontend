@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from '../NavBar/NavBar';
+import { Button, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
+import styles from "./searchclinic.module.css"
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const SearchClinic = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,27 +36,35 @@ const SearchClinic = () => {
 
   return (
     <div>
-      <h2>Search Clinic</h2>
-      <input
+      <Navbar />
+      <Typography variant="h5" style={{ textAlign: 'center', marginTop: '10px'}}>Search Clinic</Typography>
+      <div className={styles.searchContainer}>
+      <TextField
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Enter clinic name or location"
+        variant="outlined"
+        fullWidth
+        style={{ marginBottom: '16px', marginRight: '16px' }}
       />
-      <button onClick={handleSearch}>Search</button>
-
+      <Button variant="contained" className={styles.searchButton} color="primary" onClick={handleSearch}>
+        Search
+      </Button>
+      </div>
       {clinics.length > 0 ? (
-        <ul>
+        <List className={styles.clinicsContainer}>
           {clinics.map((clinic) => (
-            <li key={clinic.clinicAreaId}>
-              <Link to={`/clinic/${clinic.clinicAreaId}`}>
-                {clinic.clinicAreaName} - {clinic.location}
-              </Link>
-            </li>
+            <ListItem key={clinic.clinicAreaId} button className={styles.lists} component={Link} to={`/clinic/${clinic.clinicAreaId}`}>
+              <div className={styles.clinicElement}>
+                <span><ListItemText primary={`${clinic.clinicAreaName}`} /></span>
+                <span><ListItemText primary={`${clinic.address}`} /></span>
+              </div>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       ) : (
-        <p>No clinics found.</p>
+        <Typography variant="body1">No clinics found.</Typography>
       )}
     </div>
   );

@@ -1,0 +1,23 @@
+.chatContainer {
+    position: relative;
+    height: 850px;
+    width: 100%; /* Set to 100% to make it full width */
+    /* max-width: 700px; You can adjust the maximum width as per your requirement */
+    margin: 0 auto; /* To center the container horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+.mainContainer{
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+}
+
+.messageInput{
+    /* margin: 10px; */
+    height: 70px;
+    font-size: 20px;
+}

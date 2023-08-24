@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import PatientService from '../../../services/PatientService.js';
-import './DeletePatientStyles.css'; // Import the CSS file
+import styles from './DeletePatient.module.css'; // Import the CSS file
+import { Button, CardContent, TextField, Typography } from '@mui/material';
+import { Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const DeletePatient = () => {
   const [patientId, setPatientId] = useState(null);
   const [patient, setPatient] = useState(null);
   const [confirmation, setConfirmation] = useState(false);
+  const navigate = useNavigate();
 
   const handlePatientIdChange = (e) => {
     setPatientId(e.target.value);
@@ -34,6 +38,7 @@ const DeletePatient = () => {
 
   const handleCancelDelete = () => {
     setConfirmation(false);
+    navigate("/admin/home");
   };
 
   const handleDeletePatient = async () => {
@@ -50,49 +55,62 @@ const DeletePatient = () => {
   };
 
   return (
-    <div className="delete-patient">
+    <div className={styles.deletePatient}>
       {patient === null ? (
         <div>
-          <h2>Enter Patient ID to Delete</h2>
+          <Typography variant="h2">Enter Patient ID to Delete</Typography>
           <form onSubmit={handleFormSubmit}>
-            <div className="form-group">
-              <label htmlFor="patientId">Patient ID</label>
-              <input
-                type="text"
-                id="patientId"
-                name="patientId"
-                value={patientId || ''}
-                onChange={handlePatientIdChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <button type="submit">Fetch Patient Details</button>
+            <TextField
+              type="text"
+              id="patientId"
+              name="patientId"
+              value={patientId || ''}
+              onChange={handlePatientIdChange}
+              required
+              label="Patient ID"
+              variant="outlined"
+            />
+            <div className={styles.formGroup}>
+              <Button type="submit" variant="contained" color="primary">
+                Fetch Patient Details
+              </Button>
             </div>
           </form>
         </div>
       ) : !confirmation ? (
         <div>
-          <h2>Confirm Patient Deletion</h2>
-          <div className="patient-details">
-            <p>Patient ID: {patient.patientId}</p>
-            <p>Name: {patient.patientName}</p>
-            <p>Age: {patient.patientAge}</p>
-            <p>Phone: {patient.patientPhone}</p>
-            {/* Add more patient details as needed */}
-          </div>
-          <div className="confirm-buttons">
-            <button onClick={handleConfirmDelete}>Confirm Delete</button>
-            <button onClick={handleCancelDelete}>Cancel</button>
+          <Typography variant="h2">Confirm Patient Deletion</Typography>
+          <Card>
+            <CardContent>
+              <Typography variant="body1">Patient ID: {patient.patientId}</Typography>
+              <Typography variant="body1">Name: {patient.patientName}</Typography>
+              <Typography variant="body1">Age: {patient.patientAge}</Typography>
+              <Typography variant="body1">Phone: {patient.patientPhone}</Typography>
+              {/* Add more patient details as needed */}
+            </CardContent>
+          </Card>
+          <div className={styles.confirmButtons}>
+            <Button onClick={handleConfirmDelete} variant="contained" color="primary">
+              Confirm Delete
+            </Button>
+            <Button onClick={handleCancelDelete} variant="contained" color="secondary">
+              Cancel
+            </Button>
           </div>
         </div>
       ) : (
         <div>
-          <h2>Deleting Patient...</h2>
-          <p>Are you sure you want to delete the patient?</p>
-          <div className="confirm-buttons">
-            <button onClick={handleDeletePatient}>Yes</button>
-            <button onClick={handleCancelDelete}>No</button>
+          <Typography variant="h2">Deleting Patient...</Typography>
+          <Typography variant="body1">
+            Are you sure you want to delete the patient?
+          </Typography>
+          <div className={styles.confirmButtons}>
+            <Button onClick={handleDeletePatient} variant="contained" color="primary">
+              Yes
+            </Button>
+            <Button onClick={handleCancelDelete} variant="contained" color="secondary">
+              No
+            </Button>
           </div>
         </div>
       )}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './styles.css'; // Import the CSS file
+import styles from './styles.module.css'; // Import the CSS file
 import ClinicService from '../../../../services/ClinicService';
+import { Button, Checkbox, FormControlLabel, TextField, Typography } from '@mui/material';
 
 const AddSlots = () => {
   const [clinicId, setClinicId] = useState('');
@@ -41,26 +42,43 @@ const AddSlots = () => {
   };
 
   return (
-    <div className="add-slots">
-      <h2>Add Slots to Clinic</h2>
-      {successMessage && <div className="success-message">{successMessage}</div>}
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <div className="slot-form">
-        <input type="text" value={clinicId} onChange={(e) => setClinicId(e.target.value)} placeholder="Enter clinic ID" />
-        <input type="text" value={startTime} onChange={(e) => setStartTime(e.target.value)} placeholder="Enter start time (HH:MM:SS)" />
-        <input type="text" value={endTime} onChange={(e) => setEndTime(e.target.value)} placeholder="Enter end time (HH:MM:SS)" />
-        <div className="day-checkboxes">
-          <label>
-            <input type="checkbox" checked={days.includes('Monday')} onChange={() => setDays((prevDays) => prevDays.includes('Monday') ? prevDays.filter(day => day !== 'Monday') : [...prevDays, 'Monday'])} />
-            Monday
-          </label>
-          <label>
-            <input type="checkbox" checked={days.includes('Tuesday')} onChange={() => setDays((prevDays) => prevDays.includes('Tuesday') ? prevDays.filter(day => day !== 'Tuesday') : [...prevDays, 'Tuesday'])} />
-            Tuesday
-          </label>
+    <div className={styles.addSlots}>
+      <Typography variant="h2">Add Slots to Clinic</Typography>
+      {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
+      {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+      <div className={styles.slotForm}>
+        <input type="text" value={clinicId} onChange={(e) => setClinicId(e.target.value)} placeholder="Enter clinic ID" className={styles.inputField} />
+        <TextField
+          label="Start Time"
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          required
+          className={styles.inputField}
+        />
+        <TextField
+          label="End Time"
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          required
+          className={styles.inputField}
+        />
+        <div className={styles.dayCheckboxes}>
+          <FormControlLabel
+            control={<Checkbox checked={days.includes('Monday')} onChange={() => setDays(prevDays => prevDays.includes('Monday') ? prevDays.filter(day => day !== 'Monday') : [...prevDays, 'Monday'])} />}
+            label="Monday"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={days.includes('Tuesday')} onChange={() => setDays(prevDays => prevDays.includes('Tuesday') ? prevDays.filter(day => day !== 'Tuesday') : [...prevDays, 'Tuesday'])} />}
+            label="Tuesday"
+          />
+          
           {/* Add checkboxes for other days */}
         </div>
-        <button onClick={handleAddSlot}>Add Slot</button>
+        <Button onClick={handleAddSlot} variant="contained" className={styles.addButton}>
+          Add Slot
+        </Button>
       </div>
     </div>
   );

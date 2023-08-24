@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PatientService from '../../../services/PatientService.js';
-import './UpdatePatientDetailsStyles.css'; // Import the CSS file
+import styles from './UpdatePatient.module.css'; // Import the CSS file
 import { Link } from 'react-router-dom';
+import AdminNavbar from '../NavBar/AdminNavbar.js';
+
 
 const UpdatePatientDetails = () => {
   const [patientId, setPatientId] = useState(null);
@@ -12,11 +14,11 @@ const UpdatePatientDetails = () => {
     patientGender: '',
     patientAddress: {
       doorNo: '',
-      // street: '',
-      // city: '',
-      // state: '',
-      // country: '',
-      // pincode: '',
+      street: '',
+      city: '',
+      state: '',
+      country: '',
+      pincode: '',
     },
   });
   //const [patient, setPatient] = useState({});
@@ -55,13 +57,14 @@ const UpdatePatientDetails = () => {
     }
   };
   return (
-    <div className="update-patient-details">
+    <div className={styles.updateContainer}>
+      <AdminNavbar />
       {patientId === null ? (
         <div>
           <h2>Enter Patient ID to Update Details</h2>
           <form onSubmit={handleFormSubmit}>
-            <div className="form-group">
-              <label htmlFor="patientId">Patient ID</label>
+            <div className={styles.formGroup}>
+              <label htmlFor="patientId">Patient ID: </label>
               <input
                 type="text"
                 id="patientId"
@@ -71,7 +74,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={`${styles.formGroup} ${styles.Btn}`}>
               <button type="submit">Fetch Patient Details</button>
             </div>
           </form>
@@ -81,7 +84,7 @@ const UpdatePatientDetails = () => {
           <h2>Update Patient Details</h2>
           <form onSubmit={handleUpdateSubmit}>
             {/* Render the form with the patient details */}
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="patientName">Name</label>
               <input
                 type="text"
@@ -92,7 +95,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="patientAge">Age</label>
               <input
                 type="number"
@@ -103,7 +106,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="patientPhone">Phone</label>
               <input
                 type="tel"
@@ -114,7 +117,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="patientGender">Gender</label>
               <select
                 id="patientGender"
@@ -129,7 +132,7 @@ const UpdatePatientDetails = () => {
                 <option value="OTHER">Other</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">Door No</label>
               <input
                 type="text"
@@ -145,7 +148,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">Street</label>
               <input
                 type="text"
@@ -161,7 +164,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">City</label>
               <input
                 type="text"
@@ -177,7 +180,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">State</label>
               <input
                 type="text"
@@ -193,7 +196,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">Country</label>
               <input
                 type="text"
@@ -209,7 +212,7 @@ const UpdatePatientDetails = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="doorNo">Pin Code</label>
               <input
                 type="text"
@@ -226,12 +229,12 @@ const UpdatePatientDetails = () => {
               />
             </div>
             {/* Add more form fields for other patient address details */}
-            <div className="form-group">
+            <div className={`${styles.formGroup} ${styles.Btn}`}>
               <button type="submit">Update Details</button>
             </div>
           </form>
           {
-            message && <div className="message">{message}. Back to <Link to="/admin/home">Home</Link></div>
+            message && <div className={styles.message}>{message}. Back to <Link to="/admin/home">Home</Link></div>
           }
         </div>
       )}

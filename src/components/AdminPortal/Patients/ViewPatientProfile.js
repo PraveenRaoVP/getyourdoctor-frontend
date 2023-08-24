@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PatientService from '../../../services/PatientService.js';   
 import AppointmentService from '../../../services/AppointmentService.js';   
-
+import { List, ListItem, ListItemText, Paper, TextField, Typography } from '@mui/material';
+import styles from "./ViewPatientProfile.module.css"
+import AdminNavbar from '../NavBar/AdminNavbar.js';
 const ViewPatientProfile = () => {
   const [searchName, setSearchName] = useState('');
   const [patients, setPatients] = useState([]);
@@ -45,12 +47,13 @@ const ViewPatientProfile = () => {
 
   return (
     <div>
-      <h2>View Patient Profile</h2>
-      <div>
-        <label htmlFor="searchName">Search Patient by Name:</label>
-        <input
-          type="text"
+      <AdminNavbar />
+      <Typography variant="h2">View Patient Profile</Typography>
+      <div className={styles.searchContainer}>
+        <TextField
           id="searchName"
+          label="Search Patient by Name"
+          variant="outlined"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
           onKeyPress={(e) => {
@@ -60,43 +63,53 @@ const ViewPatientProfile = () => {
           }}
         />
       </div>
-      <div>
-      {Array.isArray(patients) && patients.length > 0 ? (
-        <ul>
-      {patients.map((patient) => (
-        <li key={patient.patientId} onClick={() => handlePatientClick(patient.patientId)}>
-          {patient.patientName}
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>No patients found with the provided name.</p>
-  )}
+      <div className={styles.patientsList}>
+        {Array.isArray(patients) && patients.length > 0 ? (
+          <Paper elevation={3}>
+            <List>
+              {patients.map((patient) => (
+                <ListItem key={patient.patientId} button onClick={() => handlePatientClick(patient.patientId)}>
+                  <ListItemText primary={patient.patientName} />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
+        ) : (
+          <Typography>No patients found with the provided name.</Typography>
+        )}
       </div>
       {selectedPatient && (
-        <div>
-          <h3>Patient Details:</h3>
-          <p><strong>Name:</strong> {selectedPatient.patientName}</p>
-          <p><strong>Email:</strong> {selectedPatient.patientEmail}</p>
-          <p><strong>Phone:</strong> {selectedPatient.patientPhone}</p>
-          <p><strong>Address:</strong> {selectedPatient.patientAddress}</p>
+        <div className={styles.patientDetails}>
+          <Typography variant="h3">Patient Details:</Typography>
+          <Typography><strong>Name:</strong> {selectedPatient.patientName}</Typography>
+          <Typography><strong>Email:</strong> {selectedPatient.patientEmail}</Typography>
+          <Typography><strong>Phone:</strong> {selectedPatient.patientPhone}</Typography>
+          {/* <Typography><strong>Address:</strong> {selectedPatient.patientAddress}</Typography> */}
           {/* Display any other patient details you have */}
         </div>
       )}
       {upcomingAppointments.length > 0 && (
-        <div>
-          <h3>Upcoming Appointments:</h3>
-          <ul>
+        <div className={styles.appointmentsList}>
+          <Typography variant="h3">Upcoming Appointments:</Typography>
+          <List>
             {upcomingAppointments.map((appointment) => (
-              <li key={appointment.id}>
-                <p><strong>Date:</strong> {appointment.appointmentDate}</p>
-                <p><strong>Time:</strong> {appointment.startTime} - {appointment.endTime}</p>
-                <p><strong>Clinic Area:</strong> {appointment.clinicArea.clinicAreaName}</p>
-                <p><strong>Doctor: </strong>{appointment.doctor.doctorName}</p>
+              <ListItem key={appointment.id}>
+                <ListItemText
+                  primary={
+                    <React.Fragment>
+                      <strong>Date:</strong> {appointment.appointmentDate} - {appointment.startTime} - {appointment.endTime}
+                    </React.Fragment>
+                  }
+                  secondary={
+                    <React.Fragment>
+                      <strong>Clinic Area:</strong> {appointment.clinicArea.clinicAreaName} - <strong>Doctor:</strong> {appointment.doctor.doctorName}
+                    </React.Fragment>
+                  }
+                />
                 {/* Display any other appointment details you have */}
-              </li>
+              </ListItem>
             ))}
-          </ul>
+          </List>
         </div>
       )}
     </div>

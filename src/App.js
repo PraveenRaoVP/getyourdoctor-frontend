@@ -28,6 +28,11 @@ import AddAdmin from './components/AdminPortal/Admins/AddAdmin/AddAdmin';
 import SearchAdmin from './components/AdminPortal/Admins/SearchAdmin/SearchAdmin';
 import DeleteAdmin from './components/AdminPortal/Admins/DeleteAdmin/DeleteAdmin';
 import AdminProfile from './components/AdminPortal/AdminProfile/AdminProfile/AdminProfile';
+import CreateDoctor from './components/AdminPortal/Doctor/CreateDoctor/CreateDoctor';
+import SearchDoctor from './components/AdminPortal/Doctor/SearchDoctor/SearchDoctor';
+import DeleteDoctor from './components/AdminPortal/Doctor/DeleteDoctor/DeleteDoctor';
+import UpdateDoctor from './components/AdminPortal/Doctor/UpdateDoctor/UpdateDoctor';
+import AssignDoctor from './components/AdminPortal/Doctor/AssignDoctor/AssignDoctor';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,6 +44,7 @@ function App() {
   const [clinics, setClinics] = useState([]);
   const [adminLoggedIn, setAdminLoggedIn] = useState(false);
   const [admin, setAdmin] = useState(null);
+  const [newDoctor, setNewDoctor] = useState(null);
 
   const handleSuccessfulLogin = (userData) => {
     setLoggedIn(true);
@@ -171,6 +177,24 @@ function App() {
         {/* Admin Profile Route */}
         <Route path="/admin/profile" element={<AdminProfile admin={admin} />} />
 
+
+        {/* Doctors routes */}
+
+        {/* Admin create new doctor route */}
+        <Route path="/admin/doctor/add" element={ <CreateDoctor newDoctor={newDoctor} setNewDoctor={setNewDoctor} />} />
+        {/* Admin Assign Doctors Route */}
+        <Route path="/admin/doctor/assign" element={<AssignDoctor newDoctor={newDoctor} clinics={clinics} />} />
+
+        {/* Admin Search Doctors route */}
+        <Route path="/admin/doctor/search" element={<SearchDoctor />} />
+
+        {/* Admin Delete Doctors Route */}
+        <Route path="/admin/doctor/delete" element={<DeleteDoctor />} />
+
+        {/* Admin Update Doctors Route */}
+        <Route path="/admin/doctor/delete" element={<UpdateDoctor />} />
+
+        
       </Routes>
     </Router>
   );

@@ -1,0 +1,22 @@
+.formGroup{
+  margin-top: 10px;
+}
+
+input{
+  margin-left: 10px;
+}
+
+select{
+  margin-left: 10px;
+}
+
+.message{
+  margin-top: 1rem;
+  color: green;
+}
+
+
+.Btn{
+  height: 60px;
+
+}

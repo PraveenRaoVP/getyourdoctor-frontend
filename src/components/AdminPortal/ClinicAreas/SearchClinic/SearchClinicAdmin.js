@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import './styles.css'; // Import the CSS file
+import React, { useEffect, useState } from 'react';
 import ClinicService from '../../../../services/ClinicService';
+import { Button, List, ListItem, ListItemText, Paper, TextField, Typography } from '@mui/material';
+import styles from './styles.module.css'; // Import the CSS file
+// import AdminNavbar from '../../AdminNavbar/AdminNavbar';
 
 const SearchClinicAdmin = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -17,6 +19,10 @@ const SearchClinicAdmin = () => {
     }
   };
 
+  useEffect(() => {
+    handleSearchClinic();
+  }, [searchKeyword])
+
   const handleClinicClick = async (clinicId) => {
     try {
       const response = await ClinicService.getClinicById(clinicId);
@@ -28,40 +34,75 @@ const SearchClinicAdmin = () => {
   };
 
   return (
-    <div className="search-clinic">
-      <h2>Search Clinic</h2>
-      <div className="search-form">
-        <input type="text" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} placeholder="Enter clinic name or type..." />
-        <button onClick={handleSearchClinic}>Search</button>
+    <div>
+      
+    <div className={styles.searchClinic}>
+      <Typography variant="h2">Search Clinic</Typography>
+      <div className={styles.searchForm}>
+        <TextField
+          type="text"
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          placeholder="Enter clinic name or type..."
+        />
+        <Button onClick={handleSearchClinic} variant="contained">
+          Search
+        </Button>
       </div>
       {searchResults.length > 0 ? (
-        <div className="search-results">
-          <h3>Search Results</h3>
-          <ul>
-            {searchResults.map((clinic) => (
-              <li key={clinic.clinicAreaId} onClick={() => handleClinicClick(clinic.clinicAreaId)} className="clinic-item">
-                <span className="clinic-name">{clinic.clinicAreaName} - </span>
-                <span className="clinic-type">{clinic.clinicAreaType}</span>
-              </li>
-            ))}
-          </ul>
+        <div className={styles.searchResults}>
+          <Typography variant="h3">Search Results</Typography>
+          <Paper elevation={3} className={styles.resultList}>
+            <List>
+              {searchResults.map((clinic) => (
+                <ListItem
+                  key={clinic.clinicAreaId}
+                  onClick={() => handleClinicClick(clinic.clinicAreaId)}
+                  className={styles.clinicItem}
+                  button
+                >
+                  <ListItemText
+                    primary={`${clinic.clinicAreaName} - ${clinic.clinicAreaType}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
         </div>
       ) : (
-        <p>No results found.</p>
+        <Typography variant="body1">No results found.</Typography>
       )}
       {selectedClinic && (
-        <div className="clinic-details">
-          <h3>Clinic Details</h3>
-          <div className="clinic-name">{selectedClinic.clinicAreaName}</div>
-          <div className="clinic-type">{selectedClinic.clinicAreaType}</div>
-          <div className="clinic-working-hours">Working Hours: {selectedClinic.workingHours}</div>
-          <div className="clinic-contact">Contact Number: {selectedClinic.contactNumber}</div>
-          <div className="clinic-email">Email: {selectedClinic.email}</div>
+        <div className={styles.clinicDetails}>
+          <Typography variant="h3">Clinic Details</Typography>
+          <Typography variant="body1" className={styles.clinicName}>
+            {selectedClinic.clinicAreaName}
+          </Typography>
+          <Typography variant="body1" className={styles.clinicType}>
+            {selectedClinic.clinicAreaType}
+          </Typography>
+          <Typography variant="body1" className={styles.clinicWorkingHours}>
+            Working Hours: {selectedClinic.workingHours}
+          </Typography>
+          <Typography variant="body1" className={styles.clinicContact}>
+            Contact Number: {selectedClinic.contactNumber}
+          </Typography>
+          <Typography variant="body1" className={styles.clinicEmail}>
+            Email: {selectedClinic.email}
+          </Typography>
           {/* Render other clinic details as needed */}
-          <button className="clear-button" onClick={() => setSelectedClinic(null)}>Close</button>
+          <Button
+            className={styles.clearButton}
+            onClick={() => setSelectedClinic(null)}
+            variant="outlined"
+          >
+            Close
+          </Button>
         </div>
       )}
     </div>
+    </div>
+
   );
 };
 

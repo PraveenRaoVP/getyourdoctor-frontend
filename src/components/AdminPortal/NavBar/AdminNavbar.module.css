@@ -1,0 +1,14 @@
+/* AdminNavbar.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
